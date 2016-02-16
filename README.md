@@ -19,6 +19,7 @@ The quickest way to get started is to clone the [starter project](https://github
 
 - [An example with JWT authentication](https://github.com/bdefore/universal-redux-jwt) ([Heroku demo](https://universal-redux-jwt-example.herokuapp.com))
 - [A refactor of react-redux-universal-hot-example with universal-redux and react-router-redux](https://github.com/bdefore/react-redux-universal-hot-example/tree/babel6) ([Heroku demo](https://universal-redux.herokuapp.com))
+- [An example using Koa instead of Express](https://github.com/bartolkaruza/universal-redux-koa) (pending [this PR](https://github.com/bartolkaruza/universal-redux-koa/pull/2))
 
 ### Usage
 
@@ -129,15 +130,14 @@ Peer dependencies for each version:
 "redux-simple-router": "^1.0.1"
 ```
 
-#### 3.x (Beta - dependencies may change)
+#### 3.x
 
-[Babel](https://github.com/babel/babel) 6, [React Router](https://github.com/rackt/react-router) 2, [React Router Redux](https://github.com/rackt/react-router-redux) 2 (Redux Simple Router renamed)
+[Babel](https://github.com/babel/babel) 6, [React Router](https://github.com/rackt/react-router) 2, [React Router Redux](https://github.com/rackt/react-router-redux) 3 (Redux Simple Router renamed) is available but optional.
 
 ```
 "react": "^0.14.3",
 "react-dom": "^0.14.3",
 "react-router": "^2.0.0-rc4",
-"react-router-redux": "^2.1.0"
 ```
 
 ### Local development
@@ -146,4 +146,4 @@ If you'd like to develop on Universal Redux, clone the repo and while testing wi
 
 ### Inspirations
 
-This project forked off of [react-redux-universal-hot-example](https://github.com/erikras/react-redux-universal-hot-example). Please refer to the README there for more details and join the discussion at the [pull request](https://github.com/erikras/react-redux-universal-hot-example/pull/626).
+This project forked off of [react-redux-universal-hot-example](https://github.com/erikras/react-redux-universal-hot-example). Please refer to the README there for more details and join the discussion at the [pull request](https://github.com/erikras/react-redux-universal-hot-example/pull/759).

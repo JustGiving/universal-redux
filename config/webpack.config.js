@@ -3,6 +3,7 @@
 // begin shared setup
 const path = require('path');
 const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
 
 // begin dev setup
 const host = (process.env.HOST || 'localhost');
@@ -43,6 +44,9 @@ module.exports = {
       ]
     },
     progress: true,
+    postcss: () => {
+      return [ autoprefixer({ browsers: [ 'last 2 versions' ] }) ];
+    },
     resolve: {
       modulesDirectories: [
         'src',
@@ -71,9 +75,9 @@ module.exports = {
     },
     module: {
       loaders: [
-        //{ test: /\.css$/, loader: 'style!css' },
-        //{ test: /\.less$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap' },
-        //{ test: /\.scss$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap' }
+        // { test: /\.css$/, loader: 'style!css' },
+        // { test: /\.less$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!postcss!less?outputStyle=expanded&sourceMap' },
+        // { test: /\.scss$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!postcss!sass?outputStyle=expanded&sourceMap' }
       ]
     },
     plugins: [
@@ -98,9 +102,9 @@ module.exports = {
     },
     module: {
       loaders: [
-        //{ test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css') },
-        //{ test: /\.less$/, loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap=true&sourceMapContents=true') },
-        //{ test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true') }
+        // { test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css') },
+        // { test: /\.less$/, loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!postcss!less?outputStyle=expanded&sourceMap=true&sourceMapContents=true') },
+        // { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!postcss!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true') }
       ]
     },
     plugins: [
