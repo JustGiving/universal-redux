@@ -14,18 +14,33 @@ const dest = document.getElementById('content');
 const store = createStore(middleware, window.__data);
 const devComponent = renderDevtools();
 
-// There is probably no need to be asynchronous here
-createRootClientComponent(store, __PROVIDERS__, devComponent)
-  .then((root) => {
-    ReactDOM.render(root, dest);
+function createRoot() {
+  createRootClientComponent(store, __PROVIDERS__, devComponent)
+    .then((root) => {
+      ReactDOM.render(root, dest);
 
-    if (process.env.NODE_ENV !== 'production') {
-      window.React = React; // enable debugger
-      if (!dest || !dest.firstChild || !dest.firstChild.attributes || !dest.firstChild.attributes['data-react-checksum']) {
-        console.warn('WARNING: Server-side React render was discarded. Make sure that your initial render does not contain any client-side code.');
+      if (process.env.NODE_ENV !== 'production') {
+        window.React = React; // enable debugger
+        if (!dest || !dest.firstChild || !dest.firstChild.attributes || !dest.firstChild.attributes['data-react-checksum']) {
+          console.warn('WARNING: Server-side React render was discarded. Make sure that your initial render does not contain any client-side code.');
+        }
       }
-    }
-  })
-  .catch((err) => {
-    console.error(err, err.stack);
+    })
+    .catch((err) => {
+      console.error(err, err.stack);
+    });
+}
+
+if (!window.Intl) {
+  require.ensure([
+    'intl',
+    'intl/locale-data/jsonp/en.js'
+  ], () => {
+    require('intl');
+    require('intl/locale-data/jsonp/en.js');
+
+    createRoot();
   });
+} else {
+  createRoot();
+}
