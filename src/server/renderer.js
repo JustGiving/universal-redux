@@ -20,7 +20,6 @@ export default (projectConfig, projectToolsConfig) => {
   const getRoutes = require(path.resolve(config.routes)).default;
   const pretty = new PrettyError();
 
-
   const dynamicMiddleware = (originalUrl, headers, send, redirect) => {
     if (__DEVELOPMENT__) {
       // Do not cache webpack stats: the script file would change since
@@ -46,7 +45,7 @@ export default (projectConfig, projectToolsConfig) => {
           send(500, resolve);
         } else if (renderProps) {
           rootServerComponent(store, renderProps, config.providers)
-            .then(({ root }) => {
+            .then((root) => {
               const content = html(config, tools.assets(), store, headers, root);
               send(200, content, resolve);
             })
