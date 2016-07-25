@@ -61,8 +61,11 @@ export default (projectConfig, projectToolsConfig) => {
     });
   };
 
+  const escapedBasename = (config.basename || '').replace(/[|\\{}()[\]^$+*?.]/g, '\\$&');
+  const basenameRegex = new RegExp(`^(${escapedBasename})`);
+
   function *koaMiddleware() {
-    yield dynamicMiddleware(this.request.originalUrl,
+    yield dynamicMiddleware(this.request.originalUrl.replace(basenameRegex, ''),
       this.request.headers,
       (status, body, resolve) => {
         this.status = status;
@@ -82,7 +85,7 @@ export default (projectConfig, projectToolsConfig) => {
     default:
     case 'express': {
       return (req, res) => {
-        dynamicMiddleware(req.originalUrl,
+        dynamicMiddleware(req.originalUrl.replace(basenameRegex, ''),
           res._headers,
           (status, body) => res.status(status).send(body),
           (url) => res.redirect(url));

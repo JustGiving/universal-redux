@@ -1,9 +1,13 @@
 import React from 'react';
-import { Router } from 'react-router';
-import { browserHistory } from 'react-router';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
+import { Router, useRouterHistory } from 'react-router';
 import { ReduxAsyncConnect } from 'redux-async-connect';
 import getRoutes from 'universal-redux/routes';
 import reactIntl from './react-intl';
+import config from '../../../bin/user-config';
+
+// Run our app under the /base URL.
+const browserHistory = useRouterHistory(createBrowserHistory)({ basename: config.basename });
 
 export default function(store) {
   const component = (
